@@ -8,11 +8,17 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import type React from "react";
 import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
+//
+import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from 'next-intl';
+import { routing } from '@/i18n/routing';
+import { HomePage } from "@/messages/en.json";
 
 const APP_NAME = "Git Me";
 const APP_DEFAULT_TITLE = "Learn Git With Me";
 const APP_TITLE_TEMPLATE = "%s - Git Me";
-const APP_DESCRIPTION = "Learn Git with me is a free and open-source Ultimate Git Guide to learn Git and GitHub.";
+const APP_DESCRIPTION = HomePage.description;
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -62,31 +68,46 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string }
 }>) {
+
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
+
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} font-regular antialiased`}
         suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          <main className="sm:container mx-auto w-[90vw] h-auto">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
-        <Toaster />
-        <Analytics />
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar locale={locale} />
+            <main className="sm:container mx-auto w-[90vw] h-auto">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+          <Toaster />
+          <Analytics />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

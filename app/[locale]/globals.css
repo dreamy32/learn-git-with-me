@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("../styles/syntax.css");
+@import url("../../styles/syntax.css");
 
 @layer base {
   :root {

@@ -1,0 +1,22 @@
+{
+    "HomePage": {
+        "title": "Hello world!",
+        "about": "Go to the about page",
+        "description": "Learn Git with me est une plateforme gratuite et libre de droits pour apprendre Git et GitHub. Elle a été conçu pour être simple et facile à comprendre pour les débutants.",
+        "git_call_to_action": "Suivez-nous sur GitHub"
+    },
+    "NavLinks": {
+        "learn": "Apprendre",
+        "blog": "Blog",
+        "guides": "Guides",
+        "community": "Communauté"
+    },
+    "Footer": {
+        "sponsor": "Parrainer",
+        "built_by": "Conçu par" 
+    },
+    "Search": {
+        "out_placeholder": "Rechercher la doc...",
+        "in_placeholder": "Type something to search..."
+    }
+}

@@ -15,28 +15,11 @@ import { page_routes } from "@/lib/routes-config";
 import { SheetClose } from "@/components/ui/sheet";
 import { LogoI } from "./Logo";
 import { Icons } from "./icons";
+import { useTranslations } from "next-intl";
 
-export const NAVLINKS = [
-  {
-    title: "Learn",
-    href: `/docs${page_routes[0].href}`,
-  },
-  {
-    title: "Blog",
-    href: "/blog",
-  },
-  {
-    title: "Guides",
-    href: "#",
-  },
-  {
-    title: "Community",
-    href: "https://github.com/spaciousejar/learn-git-with-me/discussions",
-    external: true,
-  },
-];
 
-export function Navbar() {
+
+export function Navbar(params: { locale: string }) {
   return (
     <nav className="w-full border-b h-16 sticky top-0 z-50 bg-background">
       <div className="max-w-[1300px] sm:px-0 px-3 mx-auto h-full flex items-center justify-between md:gap-2">
@@ -47,7 +30,7 @@ export function Navbar() {
               <Logo />
             </div>
             <div className="lg:flex hidden items-center gap-4 text-sm font-medium text-muted-foreground">
-              <NavMenu />
+              <NavMenu locale={params.locale}/>
             </div>
           </div>
         </div>
@@ -60,7 +43,7 @@ export function Navbar() {
                 href="https://github.com/spaciousejar/learn-git-with-me.git"
                 className={buttonVariants({ variant: "ghost", size: "icon" })}
               >
-                <Icons.gitHub className= "size-5" />
+                <Icons.gitHub className="size-5" />
               </Link>
               <ModeToggle />
             </div>
@@ -74,13 +57,35 @@ export function Navbar() {
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <LogoI/>
+      <LogoI />
       <h2 className="text-md font-bold">GIT ME</h2>
     </Link>
   );
 }
 
-export function NavMenu({ isSheet = false }) {
+type NavMenuProps = { isSheet?: boolean, locale: string };
+
+export function NavMenu({ isSheet = false, locale }: NavMenuProps) {
+  const t = useTranslations('NavLinks');
+  const NAVLINKS = [
+    {
+      title: t("learn"),
+      href: `${locale}/docs${page_routes[0].href}`,
+    },
+    {
+      title: t("blog"),
+      href: "/blog",
+    },
+    {
+      title: t("guides"),
+      href: "#",
+    },
+    {
+      title: t("community"),
+      href: "https://github.com/spaciousejar/learn-git-with-me/discussions",
+      external: true,
+    },
+  ];
   return (
     <>
       {NAVLINKS.map((item) => {

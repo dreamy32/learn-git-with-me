@@ -1,0 +1,22 @@
+{
+    "HomePage": {
+        "title": "Hello world!",
+        "about": "Go to the about page",
+        "description": "Learn Git with me is a free and open-source platform to learn Git and GitHub. It is designed to be simple and easy to understand for beginners.",
+        "git_call_to_action": "Follow along on GitHub"
+    },
+    "NavLinks": {
+        "learn": "Learn",
+        "blog": "Blog",
+        "guides": "Guides",
+        "community": "Community"
+    },
+    "Footer": {
+        "sponsor": "Sponsor",
+        "built_by": "Built by" 
+    },
+    "Search": {
+        "out_placeholder": "Search documentation...",
+        "in_placeholder": "Type something to search..."
+    }
+}

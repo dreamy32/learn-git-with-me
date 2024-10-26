@@ -14,6 +14,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useMemo, useState } from "react";
 import Anchor from "./anchor";
 import { advanceSearch, cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export default function Search() {
   const [searchedInput, setSearchedInput] = useState("");
@@ -38,6 +39,8 @@ export default function Search() {
     [searchedInput]
   );
 
+  //Translations
+  const t = useTranslations("Search");
   return (
     <div>
       <Dialog
@@ -52,7 +55,7 @@ export default function Search() {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-500 dark:text-stone-400" />
             <Input
               className="md:w-full rounded-md dark:bg-stone-950/95 bg-stone-50 border h-9 pl-10 pr-0 sm:pr-4 text-sm shadow-sm overflow-ellipsis"
-              placeholder="Search documentation..."
+              placeholder={t("out_placeholder")}
               type="search"
             />
             <div className="sm:flex hidden absolute top-1/2 -translate-y-1/2 right-2 text-xs font-medium font-mono items-center gap-0.5 dark:bg-stone-900 bg-stone-200/65 p-1 rounded-sm">
@@ -67,7 +70,7 @@ export default function Search() {
             <input
               value={searchedInput}
               onChange={(e) => setSearchedInput(e.target.value)}
-              placeholder="Type something to search..."
+              placeholder={t("in_placeholder")}
               autoFocus
               className="h-14 px-7 bg-transparent border-b text-[14px] outline-none"
             />
