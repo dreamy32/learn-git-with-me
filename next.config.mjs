@@ -25,4 +25,4 @@ const nextConfigFunction = async (phase) => {
   return nextConfig;
 };
 
-export default withNextIntl(nextConfig);
+export default withNextIntl(nextConfigFunction);

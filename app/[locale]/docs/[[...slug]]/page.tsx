@@ -7,13 +7,12 @@ import { getDocsForSlug } from "@/lib/markdown";
 import { Typography } from "@/components/typography";
 
 type PageProps = {
-  params: { slug: string[] };
+  params: { slug: string[], locale: string };
 };
 
-export default async function DocsPage({ params: { slug = [] } }: PageProps) {
+export default async function DocsPage({ params: { slug = [], locale } }: PageProps) {
   const pathName = slug.join("/");
   const res = await getDocsForSlug(pathName);
-
   if (!res) notFound();
   return (
     <div className="flex items-start gap-10">
@@ -25,7 +24,7 @@ export default async function DocsPage({ params: { slug = [] } }: PageProps) {
             {res.frontmatter.description}
           </p>
           <div>{res.content}</div>
-          <Pagination pathname={pathName} />
+          <Pagination pathname={pathName} locale={locale} />
         </Typography>
       </div>
       <Toc path={pathName} />

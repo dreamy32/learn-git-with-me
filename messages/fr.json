@@ -17,6 +17,6 @@
     },
     "Search": {
         "out_placeholder": "Rechercher la doc...",
-        "in_placeholder": "Type something to search..."
+        "in_placeholder": "Saisissez le terme à rechercher..."
     }
 }
